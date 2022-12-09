@@ -7,15 +7,16 @@ import Ranking from './components/ranking/ranking.component';
 import FaceDetector from './components/face-detector/face-detector.component';
 import SignIn from './components/sign-in/sign-in.component';
 import Register from './components/register/register.component';
+import { LocalStorage } from './components/local-storage/local-storage';
 import './App.css';
 
 function App() {
     const [input, setInput] = useState('');
     const [imgUrl, setImgUrl] = useState('');
-    const [box, setBox] = useState({});
-    const [routes, setRoutes] = useState('signin');
-    const [isUserSignIn, setIsUserSignIn] = useState(false);
-    const [user, setUser] = useState({})
+    const [box, setBox] = useState({})
+    const [routes, setRoutes] = LocalStorage('signin', 'signin');
+    const [isUserSignIn, setIsUserSignIn] = LocalStorage('isUserSignIn' ,false);
+    const [user, setUser] = LocalStorage('user' ,{})
 
     useEffect(() => {
       if(imgUrl.length <= 0){
@@ -67,6 +68,25 @@ function App() {
       return boxRegionArray;
 
     };
+
+    useEffect(()=> {
+      fetch('http://localhost:3001/checkUser', {
+        method:'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify ( {
+          id: user.id,
+          name: user.name,
+          email: user.email
+        })
+      })
+      .then(response => response.json())
+      .then(result => {
+        if(result != "Wrong credential") return;
+        changeRoute('signin', false);
+        signOutReset();
+      })
+
+    }, [])    
     
     const displayFaceBox = (box) => {
       setBox(box);
