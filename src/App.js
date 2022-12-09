@@ -23,7 +23,7 @@ function App() {
         return
        }
 
-       fetch('http://localhost:3001/clarifai', {
+       fetch('https://api-facedetector-76fu.onrender.com/clarifai', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify ({
@@ -33,7 +33,7 @@ function App() {
         .then(response => response.json())
         .then(result => {
           if(result){
-          fetch('http://localhost:3001/image', {
+          fetch('https://api-facedetector-76fu.onrender.com/image', {
             method:'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify ( {
@@ -70,7 +70,7 @@ function App() {
     };
 
     useEffect(()=> {
-      fetch('http://localhost:3001/checkUser', {
+      fetch('https://api-facedetector-76fu.onrender.com/checkUser', {
         method:'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify ( {
@@ -126,8 +126,6 @@ function App() {
         setImgUrl('');
         setUser({});
     }
-
-    console.log("actual user:", user);
 
 
     let render;

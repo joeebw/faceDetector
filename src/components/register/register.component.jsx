@@ -19,7 +19,7 @@ const onPasswordChange = (event) => {
 };
 
 const fetchRegister = async() => {
-    const registerFetch = await fetch('http://localhost:3001/register', {
+    const registerFetch = await fetch('https://api-facedetector-76fu.onrender.com/register', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify ({

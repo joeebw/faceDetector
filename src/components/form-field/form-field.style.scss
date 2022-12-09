@@ -11,8 +11,7 @@
     .input-row {
         display: flex;
         background-color: rgb(31, 25, 104);
-        padding: 25px 60px;
-        max-width: 100%;
+        padding: 25px 30px;
         border-radius: 7px;
         
         input {
@@ -30,6 +29,28 @@
 
         button:hover {
             color:navy;
+        }
+
+    }
+
+    @media only screen and (max-width: 700px) {
+        .input-row {
+            padding: 15px;
+        }
+
+        .input-row input {
+            width: 65vw;
+            height: 20px;
+        }
+
+        .input-row input:focus {
+            outline: none !important;
+            border:1px solid rgb(37, 124, 162);
+            box-shadow: 0 0 10px #719ECE;
+          }
+
+        .input-row button {
+            padding: 0px 8px;
         }
 
     }
