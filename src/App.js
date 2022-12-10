@@ -22,7 +22,6 @@ function App() {
       if(imgUrl.length <= 0){
         return
        }
-
        fetch('https://api-facedetector-76fu.onrender.com/clarifai', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
@@ -30,9 +29,8 @@ function App() {
             imgUrl: imgUrl
         })
         })
-        .then(response => response.json())
+        .then(response => response.json() )
         .then(result => {
-          if(result){
           fetch('https://api-facedetector-76fu.onrender.com/image', {
             method:'put',
             headers: {'Content-Type': 'application/json'},
@@ -42,7 +40,7 @@ function App() {
           })
           .then(response => response.json())
           .then(result =>  setUser({...user, entries: result}))
-          }
+          
 
           displayFaceBox(faceCalculator(result));
         })
