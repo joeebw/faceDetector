@@ -17,6 +17,7 @@ function App() {
     const [routes, setRoutes] = LocalStorage('signin', 'signin');
     const [isUserSignIn, setIsUserSignIn] = LocalStorage('isUserSignIn' ,false);
     const [user, setUser] = LocalStorage('user' ,{})
+    const [numberParticles ,setNumberParticles] = useState(200);
 
     useEffect(() => {
       if(imgUrl.length <= 0){
@@ -125,6 +126,15 @@ function App() {
         setUser({});
     }
 
+    useEffect(() => {
+      const numberParticlesInScreen = (num) => {
+        const width = window.innerWidth;
+        if(width > 700) return;
+        setNumberParticles(num);
+      }
+      numberParticlesInScreen(60);
+    }, []);
+
 
     let render;
     switch (routes) {
@@ -146,7 +156,7 @@ function App() {
 
    return(
     <div className='App'>
-      <ParticlesBg type="cobweb" num={200} color='#0E1294' bg={true} />
+      <ParticlesBg type="cobweb" num={numberParticles} color='#0E1294' bg={true} />
       <NavBar changeRoute={changeRoute} thereIsUser={isUserSignIn} signOutReset={signOutReset}/>
       {render}
     </div>
